@@ -1,0 +1,57 @@
+name: Reusable — Python CI
+
+on:
+  workflow_call:
+    inputs:
+      python_version:
+        description: 'Python version to use'
+        required: false
+        type: string
+        default: '3.12'
+      workdir:
+        description: 'Working directory containing the Python project'
+        required: false
+        type: string
+        default: '.'
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.workdir }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Install dependencies
+        continue-on-error: true
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install -e .
+          fi
+
+      - name: Install linters
+        continue-on-error: true
+        run: pip install ruff mypy
+
+      - name: Ruff check
+        run: ruff check .
+
+      - name: Ruff format check
+        continue-on-error: true
+        run: ruff format --check .
+
+      - name: Mypy
+        continue-on-error: true
+        run: mypy . --ignore-missing-imports
