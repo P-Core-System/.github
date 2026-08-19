@@ -12,13 +12,13 @@ Autonomous, self-healing AI systems built on a shared brain and orchestration co
 | [pcore-trader](https://github.com/P-Core-System/pcore-trader) | Automated crypto trading bot — signals, futures, margin, monitor, learn, ops panel | Python |
 | [pcore-assistant](https://github.com/P-Core-System/pcore-assistant) | AI-powered Telegram chat assistant — English/Burmese offline message handling | JavaScript |
 | [pcore-3x-ui](https://github.com/P-Core-System/pcore-3x-ui) | P-Core panel — Xray multi-protocol multi-user proxy panel (P-Core fork of 3x-ui) | Go |
+| [pcore-n8n](https://github.com/P-Core-System/pcore-n8n) | Self-hosted n8n workflow automation - n8n 2.34.5 + Python/JS task runners on sg-ec2 | TypeScript |
 
 ## Meta
 
 | Project | Description |
 |---------|-------------|
 | [.github](https://github.com/P-Core-System/.github) | Org profile, community health files, and reusable CI workflows |
-| [demo-repository](https://github.com/P-Core-System/demo-repository) | Org demo repo — static page + GitHub Actions showcase |
 
 ## Automation
 
