@@ -1,20 +1,35 @@
-# P Core System
+# P-Core System
 
-The P-Core project family — autonomous, self-healing AI systems that share a single brain and orchestration core.
+Autonomous, self-healing AI systems built on a shared brain and orchestration core — maintained by Peter.
 
 ## Projects
 
+| Project | Description | Language |
+|---------|-------------|----------|
+| [pcore-orchestra](https://github.com/P-Core-System/pcore-orchestra) | Ambient multi-agent orchestration for Cursor IDE and OpenCode CLI — plan → implement → verify → review | JavaScript |
+| [pcore-brain](https://github.com/P-Core-System/pcore-brain) | Reusable AI brain client — opencode serve bridge with auto model pools per task/agent | Python |
+| [pcore-webai](https://github.com/P-Core-System/pcore-webai) | Reusable multi-provider web AI server — Gemini & ChatGPT panels, crypto tools, ops bots | Python |
+| [pcore-trader](https://github.com/P-Core-System/pcore-trader) | Automated crypto trading bot — signals, futures, margin, monitor, learn, ops panel | Python |
+| [pcore-assistant](https://github.com/P-Core-System/pcore-assistant) | AI-powered Telegram chat assistant — English/Burmese offline message handling | JavaScript |
+| [pcore-3x-ui](https://github.com/P-Core-System/pcore-3x-ui) | P-Core panel — Xray multi-protocol multi-user proxy panel (P-Core fork of 3x-ui) | Go |
+
+## Meta
+
 | Project | Description |
 |---------|-------------|
-| [pcore-trader](https://github.com/P-Core-System/pcore-trader) | Automated crypto trading bot — signals, futures, margin, monitor, learn, ops panel |
-| [pcore-brain](https://github.com/P-Core-System/pcore-brain) | Reusable AI brain client — opencode serve bridge with auto model pools per task/agent |
-| [pcore-assistant](https://github.com/P-Core-System/pcore-assistant) | AI-powered Telegram chat assistant for offline message handling |
-| [pcore-orchestra](https://github.com/P-Core-System/pcore-orchestra) | Ambient multi-agent orchestration for Cursor IDE and OpenCode CLI |
-| [pcore-webai](https://github.com/P-Core-System/pcore-webai) | Reusable multi-provider web AI server — Gemini & ChatGPT panels, crypto tools, ops bots |
+| [.github](https://github.com/P-Core-System/.github) | Org profile, community health files, and reusable CI workflows |
+| [demo-repository](https://github.com/P-Core-System/demo-repository) | Org demo repo — static page + GitHub Actions showcase |
 
 ## Automation
 
 The P-Core org uses GitHub Actions for CI + maintenance automation:
+
 - Org-wide reusable workflows in `.github/workflows/`
 - Community health files (SECURITY, CONTRIBUTING, CODE_OF_CONDUCT, SUPPORT)
 - Dependabot version updates configured per repo
+
+## AI context methodology
+
+Every repo ships a **six-file context** (`context/` + `AGENTS.md`) so AI agents
+build with full project awareness — project overview, architecture, code
+standards, UI context, AI workflow rules, and a progress tracker.
