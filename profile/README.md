@@ -20,13 +20,24 @@ Autonomous, self-healing AI systems built on a shared brain and orchestration co
 |---------|-------------|
 | [.github](https://github.com/P-Core-System/.github) | Org profile, community health files, and reusable CI workflows |
 
-## Automation
+## Satellite repos
 
-The P-Core org uses GitHub Actions for CI + maintenance automation:
+Maintained under [@peterlianpi](https://github.com/peterlianpi):
 
-- Org-wide reusable workflows in `.github/workflows/`
-- Community health files (SECURITY, CONTRIBUTING, CODE_OF_CONDUCT, SUPPORT)
-- Dependabot version updates configured per repo
+| Repo | Description |
+|------|-------------|
+| [P-Core-System](https://github.com/peterlianpi/P-Core-System) | Monorepo — `p-core-backend`, `p-core-system`, `p-core-mobile`, zolai-dashboard plugin |
+| [pcore-real-estate](https://github.com/peterlianpi/pcore-real-estate) | Listings CRM — real estate platform (Laravel + Inertia) |
+| [gemini-server](https://github.com/peterlianpi/gemini-server) | Gemini panel server (transferred from this org; predecessor of pcore-webai) |
+
+## Automation policy
+
+To stay within GitHub free-tier minutes:
+
+- **No scheduled workflows** — all former daily/weekly crons (stale bot, mutation testing, cache cleanup, health scans, CodeQL schedule) were removed or disabled
+- CI runs on **pull requests** and **manual dispatch only** — no automatic test runs on every push
+- Release builds are **tag-driven** (`v*.*.*`) — branch pushes no longer build release artifacts
+- Production deploys keep their push triggers intentionally (`main` → deploy)
 
 ## AI context methodology
 
