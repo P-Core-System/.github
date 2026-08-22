@@ -15,7 +15,7 @@ GitHub counterpart.
 | AI brain (opencode serve) | pcore-brain | systemd (`opencode-serve`) | manual |
 | n8n bridge (brain API → workflow tools) | pcore-n8n-bridge | systemd, file synced from brain repo | brain deploy script |
 | Workflow automation | pcore-n8n | docker stack (n8n + task runners + postgres) | manual / registry image |
-| Trading bot core | pcore-trader | systemd (bot, observer, ops panel) | git pull + systemctl restart |
+| Trading bot core | pcore-trader | systemd (bot, observer, ops panel) | GitHub Actions SSH merge-deploy |
 | Trader metrics | pcore-trader `deploy/` | docker (prometheus + grafana) | docker compose |
 | Web AI panels (admin/chatgpt/gemini/control/deploy/worldcup) | pcore-webai | systemd per panel, shared venv | GitHub webhook → deploy-ops service |
 | Telegram assistant bridge | junior-peter | systemd | manual |
@@ -34,12 +34,13 @@ Headless display for browser-automation panels: Xvfb service.
   files left root-owned by other processes block `git reset --hard` — fix by
   re-owning the workspace as the deploy user.
 
-### 2. pcore-trader (git + systemd)
-- Source of truth is the checkout itself; there is **no container image
-  consumer** — do not rely on the registry-image path.
-- Update: `git fetch && git merge origin/main`, quick test, then restart the
-  bot/observer/panel units together. Restarting those units may stop dependent
-  brain-serve units — always re-check and start them again.
+### 2. pcore-trader (Actions → SSH merge-deploy)
+- Pushes touching bot/server code run an SSH deploy job: fetch, **merge**
+  `origin/main` (never reset — the node carries its own auto-heal commits;
+  conflicts fail loudly for manual resolution), restart all four trader units,
+  then verify they are active.
+- Requires the `DEPLOY_*` secrets; without a key the job warns and skips.
+- Restarting those units may stop dependent brain-serve units — always re-check.
 
 ### 3. pcore-webai (webhook-driven)
 - The deploy-ops panel receives GitHub webhooks and manages versions/panels.
