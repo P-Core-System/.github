@@ -53,12 +53,27 @@ standards, UI context, AI workflow rules, and a progress tracker.
 ## Model-aware orchestration
 
 P-Core projects use the **pcore-orchestra** agent loop. It routes work to the
-cheapest capable model per platform:
+cheapest capable model per platform so daily tasks stay cheap and hard tasks
+get the right horsepower without burning the limited “Other Models” pool.
 
-- **Cursor:** `composer-2.5` standard for daily work, `grok-4.6` standard for
-  hard / long-horizon tasks. Avoid Fast variants and Other Models as defaults.
-- **OpenCode:** free models only (e.g., `nemotron-3-ultra-free`,
-  `nemotron-3.5-lightning-free`, `x-preview-f-free`).
+| Platform | Task type | Default model | Escalation / notes |
+|----------|-----------|---------------|--------------------|
+| **Cursor** | Daily plan / implement / verify / review | `composer-2.5` standard | `grok-4.6` standard for hard or long-horizon tasks |
+| **Cursor** | Models to avoid as defaults | — | Fast variants (same intelligence, 3–6× price) and Claude/GPT/Gemini (Other Models pool, $20+ extra) |
+| **OpenCode** | Conductor / read-only phases | `x-preview-f-free` | Free Zen tier only |
+| **OpenCode** | Implementation | `nemotron-3-ultra-free` | Free Zen tier only |
+| **OpenCode** | Verification | `nemotron-3.5-lightning-free` | Free Zen tier only |
 
-Helpers: `pcore-orchestra/scripts/setup-cursor-model.sh` (Cursor) and
-`pcore-orchestra/scripts/update-free-models.sh --check` (OpenCode).
+### Why this matters
+- Cursor separates models into two usage pools: **Cursor Models** (included, generous) and **Other Models** (limited, $20+ add-on). Orchestra defaults stay in the Cursor Models pool.
+- OpenCode runs entirely on free Zen models, so automated loops do not rack up metered cost.
+- Each agent frontmatter in `pcore-orchestra/bundle/agents/` and `pcore-orchestra/bundle/opencode/agents/` pins the model explicitly.
+
+### Helpers
+- **Cursor:** `bash scripts/setup-cursor-model.sh` — pin `composer-2.5` and validate every agent frontmatter.
+- **OpenCode:** `bash scripts/update-free-models.sh --check` — verify all OpenCode agents are on free models.
+
+### Docs
+- Model routing & cost: [pcore-orchestra/docs/token-optimization.md](https://github.com/P-Core-System/pcore-orchestra/blob/main/docs/token-optimization.md)
+- Cursor vs OpenCode spawn matrix: [pcore-orchestra/docs/orchestra-cross-platform.md](https://github.com/P-Core-System/pcore-orchestra/blob/main/docs/orchestra-cross-platform.md)
+- Install & quick start: [pcore-orchestra/README.md](https://github.com/P-Core-System/pcore-orchestra/blob/main/README.md)
