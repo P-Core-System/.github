@@ -17,7 +17,7 @@ GitHub counterpart.
 | Workflow automation | pcore-n8n | docker stack (n8n + task runners + postgres) | manual / registry image |
 | Trading bot core | pcore-trader | systemd (bot, observer, ops panel) | GitHub Actions SSH merge-deploy |
 | Trader metrics | pcore-trader `deploy/` | docker (prometheus + grafana) | docker compose |
-| Web AI panels (admin/chatgpt/gemini/control/deploy/worldcup) | pcore-webai | systemd per panel, shared venv | GitHub webhook → deploy-ops service |
+| LLM web→API gateway (admin/chatgpt/gemini/deploy-ops) | pcore-webai | systemd per stack, shared venv | GitHub webhook → deploy-ops service |
 | Telegram assistant bridge | junior-peter | systemd | manual |
 | Orchestra tooling | pcore-orchestra | not runtime — installed into agent configs | install.sh |
 
@@ -43,6 +43,8 @@ Headless display for browser-automation panels: Xvfb service.
 - Restarting those units may stop dependent brain-serve units — always re-check.
 
 ### 3. pcore-webai (webhook-driven)
+
+> **2026-08-22:** trimmed to the Gemini/ChatGPT web→API gateway (crypto/worldcup/control-ops/zolai scopes removed; history on `archive/full-scope`). Not deployed yet — first deploy pending.
 - The deploy-ops panel receives GitHub webhooks and manages versions/panels.
 - Server-local modifications exist on purpose (rebuilt icons, unit tweaks);
   keep them out of commits.

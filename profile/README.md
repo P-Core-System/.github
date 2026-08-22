@@ -8,7 +8,7 @@ Autonomous, self-healing AI systems built on a shared brain and orchestration co
 |---------|-------------|----------|
 | [pcore-orchestra](https://github.com/P-Core-System/pcore-orchestra) | Ambient multi-agent orchestration for Cursor IDE and OpenCode CLI — plan → implement → verify → review | JavaScript |
 | [pcore-brain](https://github.com/P-Core-System/pcore-brain) | Reusable AI brain client — opencode serve bridge with auto model pools per task/agent | Python |
-| [pcore-webai](https://github.com/P-Core-System/pcore-webai) | Reusable multi-provider web AI server — Gemini & ChatGPT panels, crypto tools, ops bots | Python |
+| [pcore-webai](https://github.com/P-Core-System/pcore-webai) | Multi-provider LLM web-to-API gateway — Gemini & ChatGPT sessions as OpenAI-style APIs | Python |
 | [pcore-trader](https://github.com/P-Core-System/pcore-trader) | Automated crypto trading bot — signals, futures, margin, monitor, learn, ops panel | Python |
 | [pcore-assistant](https://github.com/P-Core-System/pcore-assistant) | AI-powered Telegram chat assistant — English/Burmese offline message handling | JavaScript |
 | [pcore-vpn](https://github.com/P-Core-System/pcore-vpn) | P Core-VPN — Xray multi-protocol proxy panel with reseller & brain integration (active fork of 3x-ui) | Go | Go |
