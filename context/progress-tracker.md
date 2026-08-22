@@ -4,6 +4,7 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
+- 2026-08-22 — Documented n8n as a reusable service role: added `Reusable service roles` table to `docs/INFRASTRUCTURE.md` linking to pcore-n8n artifacts. Impact: the n8n stack is now listed as a reusable deployment role for other servers/projects.
 - 2026-08-22 — Expanded org profile model routing: added per-platform model table, cost-pool rationale, and helper/docs links to `profile/README.md`. Impact: public org profile now clearly documents the Cursor vs OpenCode model policy and where to start.
 - 2026-08-22 — Org docs sync for model-aware orchestration: added model routing section to `profile/README.md`, updated `SUPPORT.md` pcore-orchestra description, and added `Model routing` rule to `context/ai-workflow-rules.md`. Impact: org profile and workflow rules now document the Cursor `composer-2.5` default / `grok-4.6` escalation and OpenCode free-model policy.
 - Complete — org profile + community health + reusable workflows live.

@@ -23,6 +23,15 @@ GitHub counterpart.
 
 Headless display for browser-automation panels: Xvfb service.
 
+## Reusable service roles
+
+These repos are intentionally packaged as reusable deployment roles so they can
+be copied or cloned to other servers or projects:
+
+| Role | Repo | Reusable artifacts | Notes |
+|------|------|--------------------|-------|
+| **Workflow automation** | [pcore-n8n](https://github.com/P-Core-System/pcore-n8n) | `docker-compose.yml`, `runners/`, `deploy.sh`, `backup.sh`, `.env.example` | Self-hosted n8n + PostgreSQL + Python task-runner sidecar. See repo `README.md` “Reusable role” section. |
+
 ## Deploy flows
 
 ### 1. pcore-brain (GitHub Actions → SSH script)
