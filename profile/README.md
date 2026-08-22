@@ -28,7 +28,6 @@ Maintained under [@peterlianpi](https://github.com/peterlianpi):
 |------|-------------|
 | [P-Core-System](https://github.com/peterlianpi/P-Core-System) | Monorepo — `p-core-backend`, `p-core-system`, `p-core-mobile`, zolai-dashboard plugin |
 | [pcore-real-estate](https://github.com/peterlianpi/pcore-real-estate) | Listings CRM — real estate platform (Laravel + Inertia) |
-| [gemini-server](https://github.com/peterlianpi/gemini-server) | Gemini panel server (transferred from this org; predecessor of pcore-webai) |
 
 ## Automation policy
 
@@ -38,6 +37,12 @@ To stay within GitHub free-tier minutes:
 - CI runs on **pull requests** and **manual dispatch only** — no automatic test runs on every push
 - Release builds are **tag-driven** (`v*.*.*`) — branch pushes no longer build release artifacts
 - Production deploys keep their push triggers intentionally (`main` → deploy)
+
+## Infrastructure
+
+Production runs on a single core VM ("**core-node**" role). Topology, deploy
+flows, and the update runbook: [docs/INFRASTRUCTURE.md](../docs/INFRASTRUCTURE.md)
+(sanitized — no hosts, IPs, keys, or endpoints).
 
 ## AI context methodology
 
