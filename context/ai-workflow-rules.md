@@ -47,6 +47,15 @@ Update the relevant context file whenever implementation changes:
 - Code conventions
 - Feature scope
 
+## Model routing
+
+For projects using pcore-orchestra:
+
+- **Cursor:** default to `composer-2.5` standard; escalate to `grok-4.6` standard only for hard / long-horizon tasks. Avoid Fast variants and Other Models as defaults.
+- **OpenCode:** use free models only. Validate with `bash scripts/update-free-models.sh --check`.
+
+See `pcore-orchestra/docs/token-optimization.md` and `pcore-orchestra/scripts/setup-cursor-model.sh`.
+
 ## Before Moving to the Next Unit
 
 1. The current unit works end to end within its scope.

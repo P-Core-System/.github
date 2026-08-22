@@ -12,7 +12,7 @@ Open a **GitHub issue** in the relevant repository. The P-Core-System org is mad
 | [pcore-brain](https://github.com/P-Core-System/pcore-brain) | Reusable AI brain client |
 | [pcore-assistant](https://github.com/P-Core-System/pcore-assistant) | AI-powered Telegram chat assistant |
 | [pcore-webai](https://github.com/P-Core-System/pcore-webai) | Multi-provider LLM web-to-API gateway |
-| [pcore-orchestra](https://github.com/P-Core-System/pcore-orchestra) | Ambient multi-agent orchestration |
+| [pcore-orchestra](https://github.com/P-Core-System/pcore-orchestra) | Ambient multi-agent orchestration for Cursor IDE and OpenCode CLI |
 
 Please check existing issues first to avoid duplicates, and include repro steps and version info.
 

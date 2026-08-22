@@ -4,6 +4,7 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
+- 2026-08-22 — Org docs sync for model-aware orchestration: added model routing section to `profile/README.md`, updated `SUPPORT.md` pcore-orchestra description, and added `Model routing` rule to `context/ai-workflow-rules.md`. Impact: org profile and workflow rules now document the Cursor `composer-2.5` default / `grok-4.6` escalation and OpenCode free-model policy.
 - Complete — org profile + community health + reusable workflows live.
 
 ## Current Goal

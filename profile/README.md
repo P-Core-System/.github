@@ -49,3 +49,16 @@ flows, and the update runbook: [docs/INFRASTRUCTURE.md](../docs/INFRASTRUCTURE.m
 Every repo ships a **six-file context** (`context/` + `AGENTS.md`) so AI agents
 build with full project awareness — project overview, architecture, code
 standards, UI context, AI workflow rules, and a progress tracker.
+
+## Model-aware orchestration
+
+P-Core projects use the **pcore-orchestra** agent loop. It routes work to the
+cheapest capable model per platform:
+
+- **Cursor:** `composer-2.5` standard for daily work, `grok-4.6` standard for
+  hard / long-horizon tasks. Avoid Fast variants and Other Models as defaults.
+- **OpenCode:** free models only (e.g., `nemotron-3-ultra-free`,
+  `nemotron-3.5-lightning-free`, `x-preview-f-free`).
+
+Helpers: `pcore-orchestra/scripts/setup-cursor-model.sh` (Cursor) and
+`pcore-orchestra/scripts/update-free-models.sh --check` (OpenCode).
