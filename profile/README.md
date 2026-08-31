@@ -7,12 +7,30 @@ Autonomous, self-healing AI systems built on a shared brain and orchestration co
 | Project | Description | Language |
 |---------|-------------|----------|
 | [pcore-orchestra](https://github.com/P-Core-System/pcore-orchestra) | Ambient multi-agent orchestration for Cursor IDE and OpenCode CLI — plan → implement → verify → review | JavaScript |
-| [pcore-brain](https://github.com/P-Core-System/pcore-brain) | Reusable AI brain client — opencode serve bridge with auto model pools per task/agent | Python |
-| [pcore-webai](https://github.com/P-Core-System/pcore-webai) | Multi-provider LLM web-to-API gateway — Gemini & ChatGPT sessions as OpenAI-style APIs | Python |
+| [pcore-brain](https://github.com/P-Core-System/pcore-brain) | Reusable AI brain client — opencode serve bridge with auto model pools per task/agent, multi-user auth, React SPA dashboard | Python |
+| [pcore-webai](https://github.com/P-Core-System/pcore-webai) | Multi-provider LLM web-to-API gateway — Gemini & ChatGPT sessions as OpenAI-style APIs, crypto tools, ops bots | Python |
 | [pcore-trader](https://github.com/P-Core-System/pcore-trader) | Automated crypto trading bot — signals, futures, margin, monitor, learn, ops panel | Python |
+| [pcore-monitor](https://github.com/P-Core-System/pcore-monitor) | Self-hostable VPS monitoring panel with Telegram bot bridge, Go server + React SPA | Go / Python |
+| [pcore-n8n-bridge](https://github.com/P-Core-System/pcore-n8n-bridge) | OpenAI-compatible HTTP bridge to pcore-brain for n8n integration | Python |
 | [pcore-assistant](https://github.com/P-Core-System/pcore-assistant) | AI-powered Telegram chat assistant — English/Burmese offline message handling | JavaScript |
-| [pcore-vpn](https://github.com/P-Core-System/pcore-vpn) | P Core-VPN — Xray multi-protocol proxy panel with reseller & brain integration (active fork of 3x-ui) | Go | Go |
-| [pcore-n8n](https://github.com/P-Core-System/pcore-n8n) | Self-hosted n8n workflow automation - n8n 2.34.5 + Python/JS task runners on the core node | TypeScript |
+| [pcore-vpn](https://github.com/P-Core-System/pcore-vpn) | P Core-VPN — Xray multi-protocol proxy panel with reseller & brain integration (active fork of 3x-ui) | Go |
+| [pcore-n8n](https://github.com/P-Core-System/pcore-n8n) | Self-hosted n8n workflow automation — n8n 2.35.7 + Python/JS task runners on the core node | TypeScript |
+
+### Archived
+
+| Project | Description | Status |
+|---------|-------------|--------|
+| [pcore-panel](https://github.com/P-Core-System/pcore-panel) | Xray multi-protocol multi-user panel (fork of 3x-ui) | Archived |
+
+### Satellite repos
+
+Maintained under [@peterlianpi](https://github.com/peterlianpi):
+
+| Repo | Description |
+|------|-------------|
+| [junior-peter](https://github.com/peterlianpi/junior-peter) | AI-powered Telegram chat assistant — operates on Peter's personal Telegram account |
+| [P-Core-System](https://github.com/peterlianpi/P-Core-System) | Monorepo — `p-core-backend`, `p-core-system`, `p-core-mobile`, zolai-dashboard plugin |
+| [pcore-real-estate](https://github.com/peterlianpi/pcore-real-estate) | Listings CRM — real estate platform (Laravel + Inertia) |
 
 ## Meta
 
@@ -20,29 +38,20 @@ Autonomous, self-healing AI systems built on a shared brain and orchestration co
 |---------|-------------|
 | [.github](https://github.com/P-Core-System/.github) | Org profile, community health files, and reusable CI workflows |
 
-## Satellite repos
+## Architecture
 
-Maintained under [@peterlianpi](https://github.com/peterlianpi):
+Production runs on a single core VM (**sg-ec2**). Topology:
 
-| Repo | Description |
-|------|-------------|
-| [P-Core-System](https://github.com/peterlianpi/P-Core-System) | Monorepo — `p-core-backend`, `p-core-system`, `p-core-mobile`, zolai-dashboard plugin |
-| [pcore-real-estate](https://github.com/peterlianpi/pcore-real-estate) | Listings CRM — real estate platform (Laravel + Inertia) |
+| Service | Port | Role |
+|---------|------|------|
+| opencode serve (brain) | `:41794` | Shared AI brain — model pools, session management |
+| brain bridge | `:4099` | OpenAI-compatible HTTP bridge for n8n and external consumers |
+| n8n | `:5678` | Workflow automation — MASTER pipeline, Telegram assistant, career navigator |
+| crypto-trader ops panel | `:4030` | Trading bot control dashboard |
+| pcore-monitor panel | `:8080` | VPS monitoring dashboard |
+| pcore-agent | `:8081` | Lightweight Go agent for SSH-less metric collection |
 
-## Automation policy
-
-To stay within GitHub free-tier minutes:
-
-- **No scheduled workflows** — all former daily/weekly crons (stale bot, mutation testing, cache cleanup, health scans, CodeQL schedule) were removed or disabled
-- CI runs on **pull requests** and **manual dispatch only** — no automatic test runs on every push
-- Release builds are **tag-driven** (`v*.*.*`) — branch pushes no longer build release artifacts
-- Production deploys keep their push triggers intentionally (`main` → deploy)
-
-## Infrastructure
-
-Production runs on a single core VM ("**core-node**" role). Topology, deploy
-flows, and the update runbook: [docs/INFRASTRUCTURE.md](../docs/INFRASTRUCTURE.md)
-(sanitized — no hosts, IPs, keys, or endpoints).
+All public endpoints are tunneled through **Cloudflare** (zero-trust, token-managed).
 
 ## AI context methodology
 
@@ -54,26 +63,25 @@ standards, UI context, AI workflow rules, and a progress tracker.
 
 P-Core projects use the **pcore-orchestra** agent loop. It routes work to the
 cheapest capable model per platform so daily tasks stay cheap and hard tasks
-get the right horsepower without burning the limited “Other Models” pool.
+get the right horsepower without burning the limited "Other Models" pool.
 
 | Platform | Task type | Default model | Escalation / notes |
 |----------|-----------|---------------|--------------------|
 | **Cursor** | Daily plan / implement / verify / review | `composer-2.5` standard | `grok-4.6` standard for hard or long-horizon tasks |
-| **Cursor** | Models to avoid as defaults | — | Fast variants (same intelligence, 3–6× price) and Claude/GPT/Gemini (Other Models pool, $20+ extra) |
-| **OpenCode** | Conductor / read-only phases | `x-preview-f-free` | Free Zen tier only |
-| **OpenCode** | Implementation | `nemotron-3-ultra-free` | Free Zen tier only |
-| **OpenCode** | Verification | `nemotron-3.5-lightning-free` | Free Zen tier only |
+| **OpenCode** | All phases | `mimo-v2.5-free` | Free Zen tier only |
 
-### Why this matters
-- Cursor separates models into two usage pools: **Cursor Models** (included, generous) and **Other Models** (limited, $20+ add-on). Orchestra defaults stay in the Cursor Models pool.
-- OpenCode runs entirely on free Zen models, so automated loops do not rack up metered cost.
-- Each agent frontmatter in `pcore-orchestra/bundle/agents/` and `pcore-orchestra/bundle/opencode/agents/` pins the model explicitly.
+## Infrastructure
 
-### Helpers
-- **Cursor:** `bash scripts/setup-cursor-model.sh` — pin `composer-2.5` and validate every agent frontmatter.
-- **OpenCode:** `bash scripts/update-free-models.sh --check` — verify all OpenCode agents are on free models.
+- **sg-ec2** (47.128.228.24) — 3.8GB RAM, opencode v1.18.24
+- **Cloudflare tunnel** — public endpoints (pcore-brain, n8n, crypto-ops)
+- **GitHub Actions** — org reusable workflows, PR-only CI (no scheduled crons)
+- **systemd + Docker** — services on sg-ec2 managed via systemd units and docker-compose
 
-### Docs
-- Model routing & cost: [pcore-orchestra/docs/token-optimization.md](https://github.com/P-Core-System/pcore-orchestra/blob/main/docs/token-optimization.md)
-- Cursor vs OpenCode spawn matrix: [pcore-orchestra/docs/orchestra-cross-platform.md](https://github.com/P-Core-System/pcore-orchestra/blob/main/docs/orchestra-cross-platform.md)
-- Install & quick start: [pcore-orchestra/README.md](https://github.com/P-Core-System/pcore-orchestra/blob/main/README.md)
+## Automation policy
+
+To stay within GitHub free-tier minutes:
+
+- **No scheduled workflows** — all former daily/weekly crons removed or disabled
+- CI runs on **pull requests** and **manual dispatch only**
+- Release builds are **tag-driven** (`v*.*.*`)
+- Production deploys keep their push triggers (`main` → deploy)
