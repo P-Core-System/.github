@@ -1,4 +1,4 @@
-# P-Core System
+﻿# P-Core System
 
 Autonomous, self-healing AI systems built on a shared brain and orchestration core — maintained by Peter.
 
@@ -14,7 +14,7 @@ Autonomous, self-healing AI systems built on a shared brain and orchestration co
 | [pcore-n8n-bridge](https://github.com/P-Core-System/pcore-n8n-bridge) | OpenAI-compatible HTTP bridge to pcore-brain for n8n integration | Python |
 | [pcore-assistant](https://github.com/P-Core-System/pcore-assistant) | AI-powered Telegram chat assistant — English/Burmese offline message handling | JavaScript |
 | [pcore-vpn](https://github.com/P-Core-System/pcore-vpn) | P Core-VPN — Xray multi-protocol proxy panel with reseller & brain integration (active fork of 3x-ui) | Go |
-| [pcore-n8n](https://github.com/P-Core-System/pcore-n8n) | Self-hosted n8n workflow automation — n8n 2.35.7 + Python/JS task runners on the core node | TypeScript |
+| [pcore-n8n](https://github.com/P-Core-System/pcore-n8n) | Self-hosted n8n workflow automation — n8n 2.37.10 + Python/JS task runners on the core node | TypeScript |
 
 ### Archived
 
@@ -32,11 +32,27 @@ Maintained under [@peterlianpi](https://github.com/peterlianpi):
 | [P-Core-System](https://github.com/peterlianpi/P-Core-System) | Monorepo — `p-core-backend`, `p-core-system`, `p-core-mobile`, zolai-dashboard plugin |
 | [pcore-real-estate](https://github.com/peterlianpi/pcore-real-estate) | Listings CRM — real estate platform (Laravel + Inertia) |
 
-## Meta
+## Teams & Departments
 
-| Project | Description |
-|---------|-------------|
-| [.github](https://github.com/P-Core-System/.github) | Org profile, community health files, and reusable CI workflows |
+See [TEAMS.md](TEAMS.md) for the complete team structure, GitHub team mappings, and repository assignments.
+
+### Departments
+- **Platform Engineering** — Core platform services (brain, orchestra, bridge)
+- **AI Products** — Customer-facing AI products (trader, assistant, webai)
+- **Infrastructure & Operations** — Infrastructure, monitoring, automation
+
+### GitHub Teams (to be created)
+- `core-platform` — pcore-brain, pcore-n8n-bridge, pcore-orchestra, .github
+- `ai-ml` — pcore-trader, pcore-assistant, pcore-webai
+- `infrastructure` — pcore-vpn, pcore-monitor, pcore-n8n
+- `security-compliance` — all repos (read access)
+- `product-design` — pcore-webai, pcore-assistant, pcore-trader
+
+## Scaling Strategy
+
+See [SCALING.md](SCALING.md) for recommendations on handling more projects, teams, and organizational growth.
+
+---
 
 ## Architecture
 
@@ -72,7 +88,7 @@ get the right horsepower without burning the limited "Other Models" pool.
 
 ## Infrastructure
 
-- **sg-ec2** (47.128.228.24) — 3.8GB RAM, opencode v1.18.24
+- **sg-ec2** (47.128.228.24) — 3.8GB RAM, opencode v1.18.26
 - **Cloudflare tunnel** — public endpoints (pcore-brain, n8n, crypto-ops)
 - **GitHub Actions** — org reusable workflows, PR-only CI (no scheduled crons)
 - **systemd + Docker** — services on sg-ec2 managed via systemd units and docker-compose
