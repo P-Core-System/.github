@@ -1,4 +1,4 @@
-# ──────────────────────────────────────────────
+﻿# ──────────────────────────────────────────────
 # P-Core Universal Project Identity — .github
 # ──────────────────────────────────────────────
 
@@ -26,7 +26,7 @@ lifecycle:
   stage: production
   status: active
   started: 2026-08-12
-  updated: 2026-08-15
+  updated: 2026-10-09
 
 team:
   lead: peter
@@ -34,6 +34,8 @@ team:
     - name: peter
       role: maintainer
       contact: peterlianpi
+
+  github_team: core-platform
 
 repository:
   url: https://github.com/P-Core-System/.github.git
@@ -69,3 +71,7 @@ _pcore:
       status: active
       date: 2026-08-15
       note: Org profile + six-file context initialized.
+    - stage: production
+      status: active
+      date: 2026-10-09
+      note: Added GitHub team assignment (core-platform).
